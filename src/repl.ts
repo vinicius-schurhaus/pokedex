@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import type { State } from "./state.js";
 
 export function cleanInput(input: string): string[] {
   const cleaned = input.toLowerCase().trim();
@@ -13,7 +13,7 @@ export function cleanInput(input: string): string[] {
 export function startREPL(state: State) {
   state.rl.prompt();
 
-  state.rl.on("line", (input) => {
+  state.rl.on("line", async (input) => {
     const clInput = cleanInput(input);
 
     if (clInput.length === 0) {
@@ -30,7 +30,7 @@ export function startREPL(state: State) {
     }
 
     try {
-      command.callback(state);
+      await command.callback(state);
     } catch (err) {
       console.error(err);
     } finally {
