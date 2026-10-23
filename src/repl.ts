@@ -22,6 +22,7 @@ export function startREPL(state: State) {
     }
 
     const command = state.commands[clInput[0]];
+    const args = clInput.slice(1);
 
     if (!command) {
       console.log("Unknown command");
@@ -30,7 +31,7 @@ export function startREPL(state: State) {
     }
 
     try {
-      await command.callback(state);
+      await command.callback(state, ...args);
     } catch (err) {
       console.error(err);
     } finally {
