@@ -25,7 +25,7 @@ export function initState(): State {
   });
 
   const commands = getCommands();
-  const pokeapi = new PokeAPI();
+  const pokeapi = new PokeAPI(10_000);
   const nextLocationsURL = "https://pokeapi.co/api/v2/location-area";
   const prevLocationsURL = null;
   const pokedex: Record<string, Pokemon> = {};
